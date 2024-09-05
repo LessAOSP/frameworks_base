@@ -1177,17 +1177,6 @@ public class TelephonyRegistry extends ITelephonyRegistry.Stub {
         if (!checkListenerPermission(events, subId, callingPackage, callingFeatureId, "listen")) {
             return;
         }
-        // Legacy applications pass SubscriptionManager.DEFAULT_SUB_ID,
-        // force all illegal subId to SubscriptionManager.DEFAULT_SUB_ID
-        int subscriptionId = SubscriptionManager.DEFAULT_SUBSCRIPTION_ID;
-        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
-            if (DBG) {
-                log("invalid subscription id, use default id");
-            }
-        } else { //APP specify subID
-            subscriptionId = subId;
-        }
-        int phoneId = getPhoneIdFromSubId(subscriptionId);
 
         int subscriptionId = SubscriptionManager.DEFAULT_SUBSCRIPTION_ID;
         // Legacy applications pass SubscriptionManager.DEFAULT_SUB_ID,
