@@ -183,7 +183,7 @@ final class WirelessChargingLayout extends FrameLayout {
         mRippleView = findViewById(R.id.wireless_charging_ripple);
         mRippleView.setupShader(rippleShape);
         int color = Utils.getColorAttr(mRippleView.getContext(),
-                R.attr.wallpaperTextColorAccent).getDefaultColor();
+                android.R.attr.colorAccent).getDefaultColor();
         if (mRippleView.getRippleShape() == RippleShape.ROUNDED_BOX) {
             mRippleView.setDuration(ROUNDED_BOX_RIPPLE_ANIMATION_DURATION);
             mRippleView.setSparkleStrength(0.22f);
