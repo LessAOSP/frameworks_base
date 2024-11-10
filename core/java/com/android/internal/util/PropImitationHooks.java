@@ -52,7 +52,7 @@ public class PropImitationHooks {
     
     private static final String PRODUCT_DEVICE = "ro.product.device";
 
-    private static final String sMainFP = "google/husky/husky:14/UD1A.230803.041/10808477:user/release-keys";
+    private static final String sMainFP = "google/komodo/komodo:15/AP3A.241105.008/12485168:user/release-keys";
     private static final String sStockFp = SystemProperties.get("ro.vendor.build.fingerprint");
 
     private static final String PACKAGE_ARCORE = "com.google.ar.core";
@@ -72,7 +72,7 @@ public class PropImitationHooks {
     private static final ComponentName GMS_ADD_ACCOUNT_ACTIVITY = ComponentName.unflattenFromString(
             "com.google.android.gms/.auth.uiflows.minutemaid.MinuteMaidActivity");
 
-    private static final Map<String, Object> sP8ProProps = createGoogleSpoofProps("husky", "Pixel 8 Pro", sMainFP);
+    private static final Map<String, Object> sP8ProProps = createGoogleSpoofProps("komodo", "Pixel 9 Pro XL", sMainFP);
     private static final Map<String, Object> gPhotosProps = createGoogleSpoofProps("marlin", "Pixel XL", "google/marlin/marlin:10/QP1A.191005.007.A3/5972272:user/release-keys");
     private static final Map<String, Object> asusROG1Props = createGameProps("ASUS_Z01QD", "Asus");
     private static final Map<String, Object> asusROG3Props = createGameProps("ASUS_I003D", "Asus");
