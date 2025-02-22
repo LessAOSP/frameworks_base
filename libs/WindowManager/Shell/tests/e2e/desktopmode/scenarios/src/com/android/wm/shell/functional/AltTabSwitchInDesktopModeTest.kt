@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 The Android Open Source Project
+ * Copyright (C) 2025 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.android.systemui.communal.shared.model
+package com.android.wm.shell.functional
 
-/** Models the types of background that can be shown on the hub. */
-enum class CommunalBackgroundType(val value: Int, val opaque: Boolean) {
-    STATIC(value = 0, opaque = true),
-    STATIC_GRADIENT(value = 1, opaque = true),
-    ANIMATED(value = 2, opaque = true),
-    NONE(value = 3, opaque = false),
-    BLUR(value = 4, opaque = false),
-    SCRIM(value = 5, opaque = false),
-}
+import com.android.wm.shell.scenarios.AltTabSwitchInDesktopMode
+import org.junit.Ignore
+import org.junit.runner.RunWith
+import org.junit.runners.BlockJUnit4ClassRunner
+
+/* Functional test for [AltTabSwitchInDesktopMode]. */
+@RunWith(BlockJUnit4ClassRunner::class)
+@Ignore("Blocked by b/392820286, include in Postsubmit, when the issue is resolved")
+class AltTabSwitchInDesktopModeTest : AltTabSwitchInDesktopMode()
