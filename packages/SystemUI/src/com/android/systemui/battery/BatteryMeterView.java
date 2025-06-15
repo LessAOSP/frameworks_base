@@ -41,7 +41,6 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -50,7 +49,6 @@ import androidx.annotation.StyleRes;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.app.animation.Interpolators;
-import com.android.systemui.BatteryBoltChargeView;
 import com.android.systemui.DualToneHandler;
 import com.android.systemui.battery.unified.BatteryColors;
 import com.android.systemui.battery.unified.BatteryDrawableState;
@@ -99,8 +97,6 @@ public class BatteryMeterView extends LinearLayout implements DarkReceiver {
     private boolean mIsStaticColor = false;
 
     private BatteryEstimateFetcher mBatteryEstimateFetcher;
-
-    protected BatteryBoltChargeView mBatteryBoltChargeView;
 
     // for Flags.newStatusBarIcons. The unified battery icon can show percent inside
     @Nullable private BatteryLayersDrawable mUnifiedBattery;
@@ -153,13 +149,6 @@ public class BatteryMeterView extends LinearLayout implements DarkReceiver {
                     getResources().getDimensionPixelOffset(R.dimen.battery_margin_bottom));
             addView(mBatteryIconView, mlp);
         }
-
-        mBatteryBoltChargeView = new BatteryBoltChargeView(context, null);
-        final MarginLayoutParams mlp2 = new MarginLayoutParams(
-                getResources().getDimensionPixelSize(R.dimen.status_bar_battery_bolt_icon_width),
-                getResources().getDimensionPixelSize(R.dimen.status_bar_battery_bolt_icon_height));
-        mlp2.setMargins(0, 0, 0, 0);
-        addView(mBatteryBoltChargeView, mlp2);
 
         updateShowPercent();
         mDualToneHandler = new DualToneHandler(context);
@@ -253,8 +242,6 @@ public class BatteryMeterView extends LinearLayout implements DarkReceiver {
         mDrawable.setCharging(isCharging);
         mDrawable.setBatteryLevel(level);
         updatePercentText();
-        updateBoltChargeView();
-        updateBatteryMeterVisibility();
 
         if (newStatusBarIcons()) {
             Drawable attr = mUnifiedBatteryState.getAttribution();
@@ -622,22 +609,6 @@ public class BatteryMeterView extends LinearLayout implements DarkReceiver {
 
         updateShowPercent();
     }
-    public void updateBoltChargeView() {
-        if (mPluggedIn) {
-            mBatteryBoltChargeView.setLevel(mLevel);
-            mBatteryBoltChargeView.setVisibility(View.VISIBLE);
-            return;
-        }
-        mBatteryBoltChargeView.setVisibility(View.GONE);
-    }
-
-    public void updateBatteryMeterVisibility() {
-        if (mPluggedIn) {
-            mBatteryIconView.setVisibility(View.GONE);
-        } else {
-            mBatteryIconView.setVisibility(View.VISIBLE);
-        }
-    }
 
     void scaleBatteryMeterViews() {
         if (!newStatusBarIcons()) {
@@ -713,9 +684,6 @@ public class BatteryMeterView extends LinearLayout implements DarkReceiver {
         mDrawable.setDisplayShield(displayShield);
         mBatteryIconView.setLayoutParams(scaledLayoutParams);
         mBatteryIconView.invalidateDrawable(mDrawable);
-
-        mBatteryBoltChargeView.updateViews();
-        mBatteryBoltChargeView.setLayoutParams(mBatteryBoltChargeView.getLayoutParams());
     }
 
     @Override
@@ -754,7 +722,6 @@ public class BatteryMeterView extends LinearLayout implements DarkReceiver {
 
         updateColors(nonAdaptedForegroundColor, nonAdaptedBackgroundColor,
                 nonAdaptedSingleToneColor);
-        mBatteryBoltChargeView.setIconTint(tint);
     }
 
     public void setStaticColor(boolean isStaticColor) {
@@ -779,7 +746,6 @@ public class BatteryMeterView extends LinearLayout implements DarkReceiver {
         if (mUnknownStateDrawable != null) {
             mUnknownStateDrawable.setTint(singleToneColor);
         }
-        mBatteryBoltChargeView.setIconTint(foregroundColor);
     }
 
     /** For newStatusBarIcons(), we use a BatteryColors object to declare the theme */

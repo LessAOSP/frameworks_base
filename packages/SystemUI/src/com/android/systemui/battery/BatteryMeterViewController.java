@@ -171,7 +171,6 @@ public class BatteryMeterViewController extends ViewController<BatteryMeterView>
         mUserTracker.addCallback(mUserChangedCallback, new HandlerExecutor(mMainHandler));
 
         mView.updateShowPercent();
-        mView.updateBatteryMeterVisibility();
     }
 
     @Override
